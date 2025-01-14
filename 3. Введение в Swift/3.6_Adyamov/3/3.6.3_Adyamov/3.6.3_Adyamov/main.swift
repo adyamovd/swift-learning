@@ -8,14 +8,34 @@
 import Foundation
 
 print("Введите первое число")
-let firstText = readLine()
-print("Введите второе число")
-let secondText = readLine()
-print("Введите одну из операций:+,-,*,/")
-let thirdText = readLine()
-print("Результат:")
-var firstValue = Int(firstText!) ?? 0
-var secondValue = Int(secondText!) ?? 0
-var thirdValue = Int(thirdText!) ?? 0
-var resultValue = firstValue; thirdValue; secondValue
-print(resultValue)
+func printSumm() {
+    guard let firstText = readLine(), let firstInt = Int(firstText) else {
+        print("Ошибка: вы не ввели число")
+        return
+    }
+    print("Введите второе число")
+    guard let secondText = readLine(), let secondInt = Int(secondText) else {
+        print("Ошибка: вы не ввели число")
+        return
+    }
+    print("Введите одну из операций:+,-,*,/")
+    guard let thirdText = readLine() else {
+        return
+    }
+    print("Результат:")
+    switch thirdText {
+    case "+":
+        print(firstInt + secondInt)
+    case "-":
+        print(firstInt - secondInt)
+    case "*":
+        print(firstInt * secondInt)
+    case "/" where secondInt == 0:
+        print("На ноль делить нельзя")
+    case "/":
+        print(firstInt / secondInt)
+    default:
+        print("Введенная операция не поддерживается")
+    }
+}
+printSumm()

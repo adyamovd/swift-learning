@@ -14,11 +14,11 @@ func start() {
         return
     }
     print("Введите текст для замены")
-    guard let changeText = readLine () else {
+    guard let changeText = readLine() else {
         print("ошибка")
         return
     }
-    print("На что нужно заменить \"",changeText,"\"?")
+    print("На что нужно заменить \"\(changeText)\"?")
     guard let replaceText = readLine() else {
         print("ошибка")
         return

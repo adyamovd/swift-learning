@@ -22,7 +22,6 @@ func calculate() {
     guard let thirdText = readLine() else {
         return
     }
-    print("Результат:")
     var resultValue: Int?
     switch thirdText {
     case "+":
@@ -33,15 +32,17 @@ func calculate() {
         resultValue = firstInt * secondInt
     case "/" where secondInt == 0:
         print("На ноль делить нельзя")
+        break
     case "/":
         resultValue = firstInt / secondInt
     default:
         print("Введенная операция не поддерживается")
+        break
     }
     guard let resultValue : Int else {
-        print("Ошибка")
         return
     }
+    print("Результат:")
     print(resultValue)
 }
 calculate()

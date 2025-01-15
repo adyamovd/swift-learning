@@ -7,8 +7,8 @@
 
 import Foundation
 
-print("Введите первое число")
-func printSumm() {
+func calculate() {
+    print("Введите первое число")
     guard let firstText = readLine(), let firstInt = Int(firstText) else {
         print("Ошибка: вы не ввели число")
         return
@@ -23,19 +23,25 @@ func printSumm() {
         return
     }
     print("Результат:")
+    var resultValue: Int?
     switch thirdText {
     case "+":
-        print(firstInt + secondInt)
+        resultValue = firstInt + secondInt
     case "-":
-        print(firstInt - secondInt)
+        resultValue = firstInt - secondInt
     case "*":
-        print(firstInt * secondInt)
+        resultValue = firstInt * secondInt
     case "/" where secondInt == 0:
         print("На ноль делить нельзя")
     case "/":
-        print(firstInt / secondInt)
+        resultValue = firstInt / secondInt
     default:
         print("Введенная операция не поддерживается")
     }
+    guard let resultValue : Int else {
+        print("Ошибка")
+        return
+    }
+    print(resultValue)
 }
-printSumm()
+calculate()

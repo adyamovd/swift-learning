@@ -7,22 +7,25 @@
 
 import Foundation
 
-print("Введите исходный текст")
-func printSumm() {
+func start() {
+    print("Введите исходный текст")
     guard let inputText = readLine() else {
+        print("ошибка")
         return
     }
     print("Введите текст для замены")
     guard let changeText = readLine () else {
+        print("ошибка")
         return
     }
-    print("На что нужно заменить?")
+    print("На что нужно заменить \"",changeText,"\"?")
     guard let replaceText = readLine() else {
+        print("ошибка")
         return
     }
     print("Результат")
     let newString = inputText.replacing(changeText, with: replaceText)
     print(newString)
 }
-printSumm()
+start()
 

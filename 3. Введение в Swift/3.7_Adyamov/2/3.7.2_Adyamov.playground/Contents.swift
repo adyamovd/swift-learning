@@ -1,6 +1,6 @@
 import UIKit
 
-var arrayIntegers = [5,7,10,22,30]
+var arrayIntegers = [5, 7, 10, 22, 30] // добавлен пробел после каждой запятой
 print(arrayIntegers.count) // вывел количество элементов
 arrayIntegers[0] += arrayIntegers.count
 print(arrayIntegers) // проверил что сработало

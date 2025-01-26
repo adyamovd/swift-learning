@@ -10,11 +10,11 @@ for key in resultArray {
     let value2 = secondDictionary[key]
     if let value1, let value2 {
         resultDictionary[key] = value1 + value2
-        } else if let value1 {
+    } else if let value1 {
         resultDictionary[key] = value1
-        } else if let value2 {
+    } else if let value2 {
         resultDictionary[key] = value2
-        }
+    }
 }
 print(resultDictionary)
 

@@ -7,20 +7,27 @@
 
 import Foundation
 
-var random = Int.random(in: 0...10)
+let random = Int.random(in: 0...10)
 print(random)
-let fixedRandom = random
-print(fixedRandom)
-repeat {
-    guard let guessText = readLine(), let guessValue = Int(guessText) else {
-        if guessValue > fixedRandom {
-            print("Меньше")
-        } else {
-            print("Больше")
+print("Отгадайте число:")
+func randomguess() {
+    var equality: Bool = true
+    var guessValueIsInt: Bool = true
+    repeat {
+        guard let guessText = readLine(), let guessValue = Int(guessText) else {
+            print("Вы ввели не число, попробуйте еще раз")
+            continue
         }
-    }
-} while guessValue != fixedRandom
-
-// брат, два вопроса:
-// как зафиксировать рандомное значение которое мне выдается на первом шаге?
-// и как пофиксить ситуацию с переменной ахах, на мой взгляд должно работать если это пофиксить
+        if guessValue > random {
+            equality = false
+            print("Нужно число меньше")
+        } else if guessValue < random {
+            equality = false
+            print("Нужно число больше")
+        } else {
+            equality = true
+            print ("Угадал")
+        }
+    } while equality != true
+}
+randomguess()

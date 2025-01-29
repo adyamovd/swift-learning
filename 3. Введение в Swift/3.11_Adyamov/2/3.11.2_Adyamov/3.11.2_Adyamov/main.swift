@@ -8,21 +8,21 @@
 import Foundation
 
 func calculate() {
-    var shouldRepeatProgram: Bool = false
+    var shouldRepeatProgram = true
     repeat {
         print("Введите первое число")
         guard let firstText = readLine(), let firstInt = Int(firstText) else {
             print("Ошибка: вы не ввели число")
-            return
+            continue
         }
         print("Введите второе число")
         guard let secondText = readLine(), let secondInt = Int(secondText) else {
             print("Ошибка: вы не ввели число")
-            return
+            continue
         }
         print("Введите одну из операций:+,-,*,/")
         guard let thirdText = readLine() else {
-            return
+            continue
         }
         var resultValue: Int?
         switch thirdText {
@@ -39,25 +39,16 @@ func calculate() {
             resultValue = firstInt / secondInt
         default:
             print("Введенная операция не поддерживается")
-            break
+            continue
         }
-        guard let resultValue : Int else {
-            return
+        guard let resultValue else {
+            continue
         }
         print("Результат:")
         print(resultValue)
         print("Хотите начать заново? Введите 0 если да:")
-        guard let shouldRepeat = readLine() else {
-            return
-        }
-        switch shouldRepeat {
-        case "0":
-            shouldRepeatProgram = true
-        case "":
-            shouldRepeatProgram = false
-        default:
-            break
-        }
+        let shouldRepeat = readLine()
+        shouldRepeatProgram = shouldRepeat == "0"
     } while shouldRepeatProgram == true
 }
 calculate()

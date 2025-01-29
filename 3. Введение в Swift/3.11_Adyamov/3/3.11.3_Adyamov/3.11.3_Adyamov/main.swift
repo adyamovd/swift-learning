@@ -11,23 +11,20 @@ let random = Int.random(in: 0...10)
 print(random)
 print("Отгадайте число:")
 func randomguess() {
-    var equality: Bool = true
-    var guessValueIsInt: Bool = true
+    var equality = true
     repeat {
-        guard let guessText = readLine(), let guessValue = Int(guessText) else {
-            print("Вы ввели не число, попробуйте еще раз")
-            continue
-        }
+            guard let guessText = readLine(), let guessValue = Int(guessText) else {
+                print("Вы ввели не число, попробуйте еще раз")
+                break
+            }
         if guessValue > random {
-            equality = false
             print("Нужно число меньше")
         } else if guessValue < random {
-            equality = false
             print("Нужно число больше")
         } else {
-            equality = true
             print ("Угадал")
         }
+        equality = guessValue == random
     } while equality != true
 }
 randomguess()

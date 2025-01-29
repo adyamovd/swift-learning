@@ -9,18 +9,18 @@ import Foundation
 
 func userNumbers() {
     print("Введите количество вводимых далее значений:")
-    var userElements: [Int] = []
     guard let nValue = readLine(), let number = Int(nValue) else {
-    print("Ошибка: вы не ввели число")
+        print("Ошибка: вы не ввели число")
         return
     }
     print("Введите \(number) значений(я):")
+    var userElements: [Int] = []
     for uNumber in 0..<number {
         guard let uNumber = readLine(), let userNubmers = Int(uNumber) else { continue }
         userElements.append(userNubmers)
-        }
-    print(userElements)
+    }
+    let resultUserElements : [Int] = Array(userElements.reversed())
+    print(resultUserElements)
 }
 userNumbers()
 
-// что значит выводит значения наоборот? типа в обратном порядке?

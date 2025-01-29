@@ -8,6 +8,7 @@
 import Foundation
 
 func calculate() {
+    var shouldRepeatProgram: Bool = false
     repeat {
         print("Введите первое число")
         guard let firstText = readLine(), let firstInt = Int(firstText) else {
@@ -45,9 +46,18 @@ func calculate() {
         }
         print("Результат:")
         print(resultValue)
-    } while firstText != "", secondText != "", thirdText != ""
-    }
+        print("Хотите начать заново? Введите 0 если да:")
+        guard let shouldRepeat = readLine() else {
+            return
+        }
+        switch shouldRepeat {
+        case "0":
+            shouldRepeatProgram = true
+        case "":
+            shouldRepeatProgram = false
+        default:
+            break
+        }
+    } while shouldRepeatProgram == true
+}
 calculate()
-
-
-// практически уверен, что нужно использовать цикл репит вайл, но все мои попытки были тщетны, зе телом цикла не видит переменные, но думаю логика такая должна быть. Пытался двигать репит и вайл вверх и вниз соответственно, тоже работает некорректно

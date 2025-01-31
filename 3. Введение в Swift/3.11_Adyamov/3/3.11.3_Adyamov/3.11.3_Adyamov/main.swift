@@ -13,10 +13,10 @@ print("Отгадайте число:")
 func randomguess() {
     var equality = true
     repeat {
-            guard let guessText = readLine(), let guessValue = Int(guessText) else {
-                print("Вы ввели не число, попробуйте еще раз")
-                break
-            }
+        guard let guessText = readLine(), let guessValue = Int(guessText) else {
+            print("Вы ввели не число, попробуйте еще раз")
+            break
+        }
         if guessValue > random {
             print("Нужно число меньше")
         } else if guessValue < random {
@@ -25,6 +25,6 @@ func randomguess() {
             print ("Угадал")
         }
         equality = guessValue == random
-    } while equality != true
+    } while !equality
 }
 randomguess()

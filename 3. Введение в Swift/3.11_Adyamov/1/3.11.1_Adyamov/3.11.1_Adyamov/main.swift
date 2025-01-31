@@ -9,10 +9,10 @@ import Foundation
 
 func userNumbers() {
     print("Введите количество вводимых далее значений:")
-        guard let nValue = readLine(), let number = Int(nValue), number > 0 else {
-            print("Ошибка: вы не ввели число (или ввели отрицательное число)")
-            return
-        }
+    guard let nValue = readLine(), let number = Int(nValue), number > 0 else {
+        print("Ошибка: вы не ввели число (или ввели отрицательное число)")
+        return
+    }
     print("Введите \(number) значений(я):")
     var userElements: [Int] = []
     for uNumber in 0..<number {
@@ -26,4 +26,3 @@ func userNumbers() {
     print(resultUserElements)
 }
 userNumbers()
-

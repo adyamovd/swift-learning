@@ -8,9 +8,7 @@
 import Foundation
 
 func findMinMax(numbers: [Int]) -> (min: Int, max: Int)? {
-    guard !numbers.isEmpty else { return nil }
-    var min = numbers[0]
-    var max = numbers[0]
+    guard var min = numbers.first, var max = numbers.first else { return nil }
     for num in numbers {
         if num < min {
             min = num
@@ -23,7 +21,7 @@ func findMinMax(numbers: [Int]) -> (min: Int, max: Int)? {
 print("Введите числа через запятую:")
 if let input = readLine() {
     let numberStrings = input.split(separator: ",")
-    var numbers = [Int]()
+    var numbers: [Int] = []
     for numberString in numberStrings {
         if let number = Int(numberString) {
             numbers.append(number)

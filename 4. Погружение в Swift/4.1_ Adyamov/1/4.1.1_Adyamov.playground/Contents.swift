@@ -1,58 +1,63 @@
 import UIKit
 
+class Fighter {
+    
+    var name: String
+    var hp: Int
+    
+    init(name: String, hp: Int) {
+        self.name = name
+        self.hp = hp
+    }
+    
+    func isFighterAlive() -> Bool {
+        return hp > 0
+    }
+}
+
 class Fight { // родительский класс
     
-    var firstFighter: String
-    var secondFighter: String
-    var winner: String
-    fileprivate var firstFighterxp = 99
+    var firstFighter: Fighter
+    var secondFighter: Fighter
     
-    init(firstFighter: String, secondFighter: String, winner: String) {
+    init(firstFighter: Fighter, secondFighter: Fighter) {
         self.firstFighter = firstFighter
         self.secondFighter = secondFighter
-        self.winner = winner
     }
     
-    func fightIsOn(_ phrase: String) {
-        guard isFighterAlive() else {
-            print("\(firstFighter) is on the floor \u{1F923}")
-            return
+    func startFight(_ phrase: String) {
+        while firstFighter.isFighterAlive() && secondFighter.isFighterAlive() {
+            let randomFighter = Bool.random() ? firstFighter : secondFighter
+            randomFighter.hp -= 1
+            print(phrase)
         }
-        firstFighterxp -= 1
-        print(phrase)
+        
+        let winner = firstFighter.isFighterAlive() ? firstFighter.name : secondFighter.name
+        print("\(winner) wins. Fatality 🥊")
     }
+}
+
+final class Newgeneration: Fight {}
+
+final class CultFight: Fight {
     
-    fileprivate func isFighterAlive() -> Bool { // инкапсуляция
-        firstFighterxp > 0
-    }
-}
-
-class Newgeneration: Fight { // дочерний класс
-    override init(firstFighter: String, secondFighter: String, winner: String) {
-        super.init(firstFighter: firstFighter, secondFighter: secondFighter, winner: winner)
-    }
-}
-
-let newGeneration = Newgeneration(firstFighter: "Vlad", secondFighter: "Dias", winner: "Girls")
-
-for _ in 0..<100 {
-    newGeneration.fightIsOn("Vlad gets his ass whooped by a small girl 🥊")
-}
-
-class CultFight: Fight {
-    
-    override func fightIsOn(_ phrase: String) {
-        guard isFighterAlive() else {
-            print("\(firstFighter) is on the floor \u{1F923}")
-            return
+    override func startFight(_ phrase: String) {
+        while firstFighter.isFighterAlive() && secondFighter.isFighterAlive() {
+            let randomFighter = Bool.random() ? firstFighter : secondFighter
+            randomFighter.hp -= 2
+            print(phrase)
         }
-        firstFighterxp -= 2 // пример полиморфизма, увеличил в 2 раза урон от Тохи, функция та же, но есть изменения
-        print(phrase)
+        
+        let winner = firstFighter.isFighterAlive() ? firstFighter.name : secondFighter.name
+        print("\(winner) wins. Fatality 🥊")
     }
 }
 
-let cultFight = CultFight(firstFighter: "Timur", secondFighter: "Mereke", winner: "Toha")
+let fights: [Fight] = [
+    Newgeneration(firstFighter: Fighter(name: "Vlad", hp: 10), secondFighter: Fighter(name: "Tanya Smirnova's friend", hp: 20)),
+    CultFight(firstFighter: Fighter(name: "Timur", hp: 10), secondFighter: Fighter(name: "Toha", hp: 30))
+]
 
-for _ in 0..<51 {
-    cultFight.fightIsOn("Toha is dangerous")
+for fight in fights {
+    fight.startFight("Fighting...")
 }

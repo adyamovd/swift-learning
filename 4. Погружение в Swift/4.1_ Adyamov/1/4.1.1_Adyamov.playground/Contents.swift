@@ -2,7 +2,7 @@ import UIKit
 
 class Fighter {
     
-    var name: String
+    let name: String
     var hp: Int
     
     init(name: String, hp: Int) {
@@ -15,10 +15,10 @@ class Fighter {
     }
 }
 
-class Fight { // родительский класс
+class Fight {
     
-    var firstFighter: Fighter
-    var secondFighter: Fighter
+    let firstFighter: Fighter
+    let secondFighter: Fighter
     
     init(firstFighter: Fighter, secondFighter: Fighter) {
         self.firstFighter = firstFighter
@@ -26,7 +26,7 @@ class Fight { // родительский класс
     }
     
     func startFight(_ phrase: String) {
-        while firstFighter.isFighterAlive() && secondFighter.isFighterAlive() {
+        while firstFighter.isFighterAlive() || secondFighter.isFighterAlive() {
             let randomFighter = Bool.random() ? firstFighter : secondFighter
             randomFighter.hp -= 1
             print(phrase)
@@ -42,7 +42,7 @@ final class Newgeneration: Fight {}
 final class CultFight: Fight {
     
     override func startFight(_ phrase: String) {
-        while firstFighter.isFighterAlive() && secondFighter.isFighterAlive() {
+        while firstFighter.isFighterAlive() || secondFighter.isFighterAlive() {
             let randomFighter = Bool.random() ? firstFighter : secondFighter
             randomFighter.hp -= 2
             print(phrase)
@@ -54,7 +54,7 @@ final class CultFight: Fight {
 }
 
 let fights: [Fight] = [
-    Newgeneration(firstFighter: Fighter(name: "Vlad", hp: 10), secondFighter: Fighter(name: "Tanya Smirnova's friend", hp: 20)),
+    Newgeneration(firstFighter: Fighter(name: "Dias", hp: 10), secondFighter: Fighter(name: "Tanya Smirnova", hp: 20)),
     CultFight(firstFighter: Fighter(name: "Timur", hp: 10), secondFighter: Fighter(name: "Toha", hp: 30))
 ]
 

@@ -4,7 +4,7 @@ struct Container {
     let value: Int
 }
 
-var containers: [Container] = [
+let containers: [Container] = [
     Container(value: 7),
     Container(value: 1),
     Container(value: 5),
@@ -25,7 +25,8 @@ let optionalConatianers: [Container?] = [
 ]
 
 let containersInBrackets: [[Container]] = [
-    [containers[0], containers[1], containers[2], containers[3],
+    [containers[0], containers[1],
+     containers[2], containers[3],
      containers[4], containers[5], containers[6]]
 ]
 

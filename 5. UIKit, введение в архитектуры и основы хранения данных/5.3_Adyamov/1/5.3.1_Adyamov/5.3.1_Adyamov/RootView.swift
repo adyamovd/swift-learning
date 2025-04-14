@@ -50,6 +50,7 @@ final class RootView: UIView {
         let label3 = UILabel()
         label3.translatesAutoresizingMaskIntoConstraints = false
         label3.text = "Текст22222323232"
+        label3.textAlignment = .right
         return label3
     }()
     
@@ -83,7 +84,7 @@ final class RootView: UIView {
         configureSubviews()
         configureConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -103,25 +104,20 @@ final class RootView: UIView {
             topView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             topView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             topView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            topView.heightAnchor.constraint(equalToConstant: 60),
             
             centerLeftView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 12),
             centerLeftView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             centerLeftView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -16),
-            centerLeftView.heightAnchor.constraint(equalTo: topView.heightAnchor),
-            centerLeftView.widthAnchor.constraint(greaterThanOrEqualTo: label2.widthAnchor),
             
             bottomRightView.topAnchor.constraint(equalTo: centerLeftView.bottomAnchor, constant: 12),
             bottomRightView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 16),
             bottomRightView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            bottomRightView.heightAnchor.constraint(equalTo: topView.heightAnchor),
-            bottomRightView.widthAnchor.constraint(greaterThanOrEqualTo: label3.widthAnchor),
             
             label1.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
             label1.topAnchor.constraint(equalTo: topView.topAnchor, constant: 16),
             label1.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: 16),
             label1.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -16),
-        
+            
             label2.leadingAnchor.constraint(equalTo: centerLeftView.leadingAnchor, constant: 16),
             label2.topAnchor.constraint(equalTo: centerLeftView.topAnchor, constant: 16),
             label2.trailingAnchor.constraint(equalTo: centerLeftView.trailingAnchor, constant: -16),

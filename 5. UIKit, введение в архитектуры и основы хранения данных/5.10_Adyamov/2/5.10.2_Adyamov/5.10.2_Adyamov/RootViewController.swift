@@ -1,6 +1,6 @@
 //
 //  RootViewController.swift
-//  5.5.1_Adyamov
+//  5.10.2_Adyamov
 //
 //  Created by Диас Адямов  on 06.04.2025.
 //
@@ -21,3 +21,4 @@ class RootViewController: UIViewController {
     }
     
 }
+

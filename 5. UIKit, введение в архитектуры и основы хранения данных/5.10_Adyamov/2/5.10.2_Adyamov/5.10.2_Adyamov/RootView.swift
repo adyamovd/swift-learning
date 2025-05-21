@@ -1,9 +1,10 @@
 //
 //  RootView.swift
-//  5.5.1_Adyamov
+//  5.10.2_Adyamov
 //
-//  Created by Диас Адямов  on 06.04.2025.
+//  Created by Диас Адямов  on 21.05.2025.
 //
+
 
 import UIKit
 
@@ -11,34 +12,32 @@ final class RootView: UIView {
     
     private let filledDefaultButton = StyledButton(
         text: "Тапни меня!",
-        style: .filled
+        style: .filled(.defaultParameter)
     )
     
     private let filledCustomButton = StyledButton(
         text: "Тапни меня!",
-        style: .filled,
-        filledParams: FilledStyleParameters(
-            backgroundColor: .systemGreen, 
+        style: .filled(.init(
+            backgroundColor: .systemGreen,
             shadowColor: .gray,
             shadowOpacity: 0.5,
             shadowRadius: 6,
             shadowOffset: CGSize(width: 2, height: 4)
-        )
+        ))
     )
     
     private let outlinedDefaultButton = StyledButton(
         text: "Тапни меня!",
-        style: .outlined
+        style: .outlined(.defaultParameter)
     )
     
-    private let outlinedCustomButton = StyledButton(
+    let outlinedCustomButton = StyledButton(
         text: "Тапни меня!",
-        style: .outlined,
-        outlinedParams: OutlinedStyleParameters(
+        style: .outlined(.init(
             borderColor: .systemRed,
             borderWidth: 4,
             textColor: .systemRed
-        )
+        ))
     )
     
     override init(frame: CGRect) {

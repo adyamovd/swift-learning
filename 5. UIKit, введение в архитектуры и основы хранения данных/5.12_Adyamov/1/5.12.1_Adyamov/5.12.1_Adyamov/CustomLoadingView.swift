@@ -15,7 +15,7 @@ final class CustomLoadingView: UIView {
         super.init(frame: frame)
         setupLayer()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayer()
@@ -24,15 +24,17 @@ final class CustomLoadingView: UIView {
     private func setupLayer() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = min(bounds.width, bounds.height) / 2 - 10
-        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: .pi * 1.5, clockwise: true)
-
+        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = UIColor.systemBlue.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 8
         shapeLayer.lineCap = .round
-        shapeLayer.strokeEnd = 0.5
+        shapeLayer.strokeStart = 0
+        shapeLayer.strokeEnd = 0.25
         
+        shapeLayer.transform = CATransform3DMakeRotation(-.pi / 2, 0, 0, 1)
         layer.addSublayer(shapeLayer)
     }
     
@@ -46,19 +48,35 @@ final class CustomLoadingView: UIView {
         guard !isAnimating else { return }
         isAnimating = true
         self.isHidden = false
+
+        let strokeEndAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
+        strokeEndAnimation.values = [0.25, 0.5, 0.5, 0.5, 0.25]
         
-        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotationAnimation.toValue = NSNumber(value: Double.pi * 2)
-        rotationAnimation.duration = 2
+        let strokeStartAnimation = CAKeyframeAnimation(keyPath: "strokeStart")
+        strokeStartAnimation.values = [0.0, 0.0, 0.25, 0.5, 0.75]
+        
+        let keyTimes: [NSNumber] = [0, 0.2, 0.4, 0.6, 0.8].map { NSNumber(value: $0) }
+        strokeEndAnimation.keyTimes = keyTimes
+        strokeStartAnimation.keyTimes = keyTimes
+        
+        let duration: Double = 4.0
+        strokeEndAnimation.duration = duration
+        strokeStartAnimation.duration = duration
+        strokeEndAnimation.repeatCount = .infinity
+        strokeStartAnimation.repeatCount = .infinity
+        strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        strokeStartAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.fromValue = -Double.pi / 2
+        rotationAnimation.toValue = -Double.pi / 2 + 2 * Double.pi
+        rotationAnimation.duration = duration
         rotationAnimation.repeatCount = .infinity
-        shapeLayer.add(rotationAnimation, forKey: "rotationAnimation")
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
         
-        let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        strokeAnimation.toValue = 0.8
-        strokeAnimation.duration = 1
-        strokeAnimation.autoreverses = true
-        strokeAnimation.repeatCount = .infinity
-        shapeLayer.add(strokeAnimation, forKey: "strokeAnimation")
+        shapeLayer.add(rotationAnimation, forKey: "rotationAnimation")
+        shapeLayer.add(strokeEndAnimation, forKey: "strokeEndAnimation")
+        shapeLayer.add(strokeStartAnimation, forKey: "strokeStartAnimation")
     }
     
     func stopAnimating() {

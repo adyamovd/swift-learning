@@ -8,19 +8,20 @@
 import UIKit
 
 final class CustomLoadingView: UIView {
+
     private let shapeLayer = CAShapeLayer()
     private var isAnimating = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayer()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayer()
     }
-    
+
     private func setupLayer() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = min(bounds.width, bounds.height) / 2 - 10
@@ -31,54 +32,40 @@ final class CustomLoadingView: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 8
         shapeLayer.lineCap = .round
-        shapeLayer.strokeStart = 0
-        shapeLayer.strokeEnd = 0.25
-        
+
         shapeLayer.transform = CATransform3DMakeRotation(-.pi / 2, 0, 0, 1)
         layer.addSublayer(shapeLayer)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         shapeLayer.frame = bounds
         setupLayer()
     }
-    
+
     func startAnimating() {
         guard !isAnimating else { return }
         isAnimating = true
         self.isHidden = false
 
         let strokeEndAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
-        strokeEndAnimation.values = [0.25, 0.5, 0.5, 0.5, 0.25]
-        
+        strokeEndAnimation.values = [0.0, 0.25, 0.5, 0.75, 1.0, 1.0, 1.0]
+
         let strokeStartAnimation = CAKeyframeAnimation(keyPath: "strokeStart")
-        strokeStartAnimation.values = [0.0, 0.0, 0.25, 0.5, 0.75]
-        
-        let keyTimes: [NSNumber] = [0, 0.2, 0.4, 0.6, 0.8].map { NSNumber(value: $0) }
-        strokeEndAnimation.keyTimes = keyTimes
-        strokeStartAnimation.keyTimes = keyTimes
-        
-        let duration: Double = 4.0
+        strokeStartAnimation.values = [0.0, 0.0, 0.0, 0.25, 0.5, 0.75, 1.0]
+
+        let duration: Double = 3.0
         strokeEndAnimation.duration = duration
         strokeStartAnimation.duration = duration
         strokeEndAnimation.repeatCount = .infinity
         strokeStartAnimation.repeatCount = .infinity
         strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         strokeStartAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        
-        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.fromValue = -Double.pi / 2
-        rotationAnimation.toValue = -Double.pi / 2 + 2 * Double.pi
-        rotationAnimation.duration = duration
-        rotationAnimation.repeatCount = .infinity
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
-        
-        shapeLayer.add(rotationAnimation, forKey: "rotationAnimation")
+
         shapeLayer.add(strokeEndAnimation, forKey: "strokeEndAnimation")
         shapeLayer.add(strokeStartAnimation, forKey: "strokeStartAnimation")
     }
-    
+
     func stopAnimating() {
         guard isAnimating else { return }
         isAnimating = false

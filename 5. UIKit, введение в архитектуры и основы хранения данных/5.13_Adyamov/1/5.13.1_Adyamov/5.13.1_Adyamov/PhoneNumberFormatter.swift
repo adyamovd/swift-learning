@@ -5,7 +5,7 @@
 //  Created by Диас Адямов  on 04.06.2025.
 //
 
-import Foundation
+import UIKit
 
 final class PhoneNumberFormatter {
     private let phoneRegex = "^\\+7\\s\\(\\d{0,3}\\)\\s?\\d{0,3}-?\\d{0,2}-?\\d{0,2}$"

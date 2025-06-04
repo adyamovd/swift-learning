@@ -8,18 +8,17 @@
 import UIKit
 
 final class RootView: UIView {
-    lazy var textField: TextField = {
-        let textField = TextField(placeholder: "Имя")
+    lazy var textField: NameTextField = {
+        let textField = NameTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .next
         return textField
     }()
     
-    lazy var phoneTextField: TextField = {
-        let textField = TextField(placeholder: "Номер телефона")
+    lazy var phoneTextField: PhoneNumberTextField = {
+        let textField = PhoneNumberTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .done
-        textField.keyboardType = .phonePad
         return textField
     }()
     
@@ -57,7 +56,7 @@ final class RootView: UIView {
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            textField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            textField.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             textField.heightAnchor.constraint(equalToConstant: 44),
             
             phoneTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),

@@ -42,7 +42,7 @@ class RootViewController: UIViewController, UITextFieldDelegate {
     
     private func updateSendButtonState() {
         let isNameFilled = !(mainView.textField.text?.isEmpty ?? true)
-        let isPhoneFilled = mainView.phoneTextField.text?.count == 18
+        let isPhoneFilled = mainView.phoneTextField.isValid
         mainView.sendButton.isEnabled = isNameFilled && isPhoneFilled
         mainView.sendButton.alpha = mainView.sendButton.isEnabled ? 1.0 : 0.5
     }

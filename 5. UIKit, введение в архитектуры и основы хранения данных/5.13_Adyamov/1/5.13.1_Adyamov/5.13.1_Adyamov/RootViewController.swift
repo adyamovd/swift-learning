@@ -8,10 +8,7 @@
 import UIKit
 
 class RootViewController: UIViewController, UITextFieldDelegate {
-    private var mainView: RootView! {
-        return view as? RootView
-    }
-    private var isLoading = false
+    private let mainView = RootView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +21,7 @@ class RootViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func loadView() {
-        view = RootView()
+        view = mainView
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

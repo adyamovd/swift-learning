@@ -57,12 +57,10 @@ final class RootView: UIView {
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             textField.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            textField.heightAnchor.constraint(equalToConstant: 44),
             
             phoneTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             phoneTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             phoneTextField.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
-            phoneTextField.heightAnchor.constraint(equalToConstant: 44),
             
             sendButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             sendButton.topAnchor.constraint(equalTo: phoneTextField.bottomAnchor, constant: 16),

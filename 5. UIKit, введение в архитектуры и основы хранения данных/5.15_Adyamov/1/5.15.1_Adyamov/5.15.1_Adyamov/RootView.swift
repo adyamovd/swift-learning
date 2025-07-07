@@ -8,29 +8,167 @@
 import UIKit
 
 final class RootView: UIView {
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let mainStackView = UIStackView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
-    private let topStack1 = UIStackView()
-    private let topLeftStack1 = UIStackView()
-    private let topRightView1 = UIView()
-    private let middleView1 = UIView()
-    private let bottomStack1 = UIStackView()
-    private let leftView1_1 = UIView()
-    private let leftView1_2 = UIView()
-    private let bottomView1_1 = UIView()
-    private let bottomView1_2 = UIView()
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-    private let topStack2 = UIStackView()
-    private let topLeftStack2 = UIStackView()
-    private let topRightView2 = UIView()
-    private let middleView2 = UIView()
-    private let bottomStack2 = UIStackView()
-    private let leftView2_1 = UIView()
-    private let leftView2_2 = UIView()
-    private let bottomView2_1 = UIView()
-    private let bottomView2_2 = UIView()
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topStack1: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topLeftStack1: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topRightView1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let middleView1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let bottomStack1: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let leftView1_1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let leftView1_2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let bottomView1_1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let bottomView1_2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let topStack2: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topLeftStack2: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topRightView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let middleView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let bottomStack2: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let leftView2_1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let leftView2_2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let bottomView2_1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private let bottomView2_2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 16
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,93 +182,21 @@ final class RootView: UIView {
     }
     
     private func configureSubviews() {
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
-        
-        mainStackView.axis = .vertical
-        mainStackView.spacing = 10
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(mainStackView)
         
-        topLeftStack1.axis = .vertical
-        topLeftStack1.spacing = 10
-        topLeftStack1.distribution = .fillEqually
-        topLeftStack1.translatesAutoresizingMaskIntoConstraints = false
-        
-        leftView1_1.backgroundColor = .systemPink
-        leftView1_1.layer.cornerRadius = 16
-        leftView1_2.backgroundColor = .systemPink
-        leftView1_2.layer.cornerRadius = 16
         topLeftStack1.addArrangedSubview(leftView1_1)
         topLeftStack1.addArrangedSubview(leftView1_2)
-        
-        topRightView1.backgroundColor = .systemPink
-        topRightView1.layer.cornerRadius = 16
-        topRightView1.translatesAutoresizingMaskIntoConstraints = false
-        
-        topStack1.axis = .horizontal
-        topStack1.spacing = 10
-        topStack1.distribution = .fill
-        topStack1.translatesAutoresizingMaskIntoConstraints = false
         topStack1.addArrangedSubview(topLeftStack1)
         topStack1.addArrangedSubview(topRightView1)
-        
-        middleView1.backgroundColor = .systemPink
-        middleView1.layer.cornerRadius = 16
-        middleView1.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomStack1.axis = .horizontal
-        bottomStack1.spacing = 10
-        bottomStack1.distribution = .fillEqually
-        bottomStack1.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomView1_1.backgroundColor = .systemPink
-        bottomView1_1.layer.cornerRadius = 16
-        bottomView1_2.backgroundColor = .systemPink
-        bottomView1_2.layer.cornerRadius = 16
         bottomStack1.addArrangedSubview(bottomView1_1)
         bottomStack1.addArrangedSubview(bottomView1_2)
         
-        topLeftStack2.axis = .vertical
-        topLeftStack2.spacing = 10
-        topLeftStack2.distribution = .fillEqually
-        topLeftStack2.translatesAutoresizingMaskIntoConstraints = false
-        
-        leftView2_1.backgroundColor = .systemPink
-        leftView2_1.layer.cornerRadius = 16
-        leftView2_2.backgroundColor = .systemPink
-        leftView2_2.layer.cornerRadius = 16
         topLeftStack2.addArrangedSubview(leftView2_1)
         topLeftStack2.addArrangedSubview(leftView2_2)
-        
-        topRightView2.backgroundColor = .systemPink
-        topRightView2.layer.cornerRadius = 16
-        topRightView2.translatesAutoresizingMaskIntoConstraints = false
-        
-        topStack2.axis = .horizontal
-        topStack2.spacing = 10
-        topStack2.distribution = .fill
-        topStack2.translatesAutoresizingMaskIntoConstraints = false
         topStack2.addArrangedSubview(topLeftStack2)
         topStack2.addArrangedSubview(topRightView2)
-        
-        middleView2.backgroundColor = .systemPink
-        middleView2.layer.cornerRadius = 16
-        middleView2.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomStack2.axis = .horizontal
-        bottomStack2.spacing = 10
-        bottomStack2.distribution = .fillEqually
-        bottomStack2.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomView2_1.backgroundColor = .systemPink
-        bottomView2_1.layer.cornerRadius = 16
-        bottomView2_2.backgroundColor = .systemPink
-        bottomView2_2.layer.cornerRadius = 16
         bottomStack2.addArrangedSubview(bottomView2_1)
         bottomStack2.addArrangedSubview(bottomView2_2)
         
@@ -144,7 +210,6 @@ final class RootView: UIView {
     
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),

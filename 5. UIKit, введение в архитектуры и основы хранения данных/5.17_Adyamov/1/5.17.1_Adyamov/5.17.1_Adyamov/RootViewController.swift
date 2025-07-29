@@ -11,20 +11,38 @@ class RootViewController: UIViewController {
     
     private let mainView = RootView()
     
+    private lazy var actionButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.background.backgroundColor = .systemBlue
+        config.background.cornerRadius = 8
+        config.attributedTitle = .init("2 экран", attributes: .init([.foregroundColor: UIColor.white]))
+        config.contentInsets.top = 2
+        config.contentInsets.bottom = 2
+        
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Detailed VC"
-        mainView.buttonAction = { [weak self] in
-            let vc = DetailViewController(inputValue: "123")
-            vc.delegate = self
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }
+        navigationItem.rightBarButtonItem = .init(customView: actionButton)
     }
-        
+    
     override func loadView() {
         view = mainView
     }
+    
+    @objc
+    private func buttonPressed() {
+        let vc = DetailViewController(inputValue: "123")
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension RootViewController: DetailViewControllerDelegate {
@@ -38,4 +56,5 @@ extension RootViewController: DetailViewControllerDelegate {
         )
         mainView.backgroundColor = randomColor
     }
+
 }
